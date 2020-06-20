@@ -1,8 +1,7 @@
 import tkinter
-import math
-from tkinter import Entry
 
-math_action = ""  #this variable contains the math action
+
+math_action = ""  # This variable contains the math action
 root = tkinter.Tk()
 
 root.title("Simple Calculator")
@@ -13,19 +12,19 @@ entry.grid(row = 0, column = 0, columnspan = 3, padx = 10, pady = 10)
 def button_click(number):
     current = entry.get()
     entry.delete(0, tkinter.END)
-    entry.insert(0, str(current) + str(number))  #inserts the number to the Entry
+    entry.insert(0, str(current) + str(number))  # Inserts the number to the Entry
 
 def button_clear_action():
-    entry.delete(0, tkinter.END)  #removes everything in entry
+    entry.delete(0, tkinter.END)  # Removes everything in entry
 
 def button_decimal():
-    entry.insert(tkinter.END, ".")
+    entry.insert(tkinter.END, ".")  #Adds decimal dot on screen
 
 def button_add_action():
     """addtion action"""
     number = entry.get()
     global first_number
-    first_number = float(number)  #save the first number typed for the math action
+    first_number = float(number)  # Save the first number typed for the math action
     entry.delete(0, tkinter.END)
 
     global math_action
@@ -35,7 +34,7 @@ def button_subtract_action():
     """subtract action"""
     number = entry.get()
     global first_number
-    first_number = float(number)  # save the first number typed for the math action
+    first_number = float(number)  # Saves the first number typed for the math action
     entry.delete(0, tkinter.END)
 
     global math_action
@@ -45,7 +44,7 @@ def button_multiply_action():
     """multiply action"""
     number = entry.get()
     global first_number
-    first_number = float(number)  # save the first number typed for the math action
+    first_number = float(number)  # Saves the first number typed for the math action
     entry.delete(0, tkinter.END)
 
     global math_action
@@ -55,49 +54,58 @@ def button_divide_action():
     """divide action"""
     number = entry.get()
     global first_number
-    first_number = float(number)  # save the first number typed for the math action
+    first_number = float(number)  # Saves the first number typed for the math action
     entry.delete(0, tkinter.END)
 
     global math_action
     math_action = "/"
 
 def button_equal():
-    second_number = float(entry.get())  # saves the second number
+    second_number = float(entry.get())  # Saves the second number
     entry.delete(0, tkinter.END)
 
 
     if math_action == "+":
-        if str(first_number).endswith(".0") and str(second_number).endswith(".0"):
-            entry.insert(0, int(first_number + second_number))  #shows the result on screen
+        if first_number.is_integer() and second_number.is_integer():  # Checks if both numbers are integers. If so, it will return an integer
+            entry.insert(0, int(first_number + second_number))  # Shows the result on screen
+
+        elif (first_number + second_number).is_integer():  # Checks if the result is an integer. If so, it will return an integer
+            entry.insert(0, int(first_number + second_number))  # Shows the result on screen
 
         else:
             entry.insert(0, first_number + second_number)  # shows the result on screen
 
     if math_action == "-":
 
-        if str(first_number).endswith(".0") and str(second_number).endswith(".0"):
-            entry.insert(0, int(first_number - second_number))  # shows the result on screen
+        if first_number.is_integer() and second_number.is_integer():  # Checks if both numbers are integers. If so, it will return an integer
+            entry.insert(0, int(first_number - second_number))  # Shows the result on screen
+
+        elif (first_number - second_number).is_integer():  # Checks if the result is an integer. If so, it will return an integer
+            entry.insert(0, int(first_number - second_number))  # Shows the result on screen
 
         else:
-            entry.insert(0, first_number - second_number)  # shows the result on screen
+            entry.insert(0, first_number - second_number)  # Shows the result on screen
 
     if math_action == "*":
 
-        if str(first_number).endswith(".0") and str(second_number).endswith(".0"):
-            entry.insert(0, int(first_number * second_number))  # shows the result on screen
+        if first_number.is_integer() and second_number.is_integer():  # Checks if both numbers are integers. If so, it will return an integer
+            entry.insert(0, int(first_number * second_number))  # Shows the result on screen
+
+        elif (first_number * second_number).is_integer():  # Checks if the result is an integer. If so, it will return an integer
+            entry.insert(0, int(first_number * second_number))  # Shows the result on screen
 
         else:
-            entry.insert(0, first_number * second_number)  # shows the result on screen
+            entry.insert(0, first_number * second_number)  # Shows the result on screen
 
     if math_action == "/":
-        if str(first_number).endswith(".0") and str(second_number).endswith(".0") and (first_number / second_number).is_integer():
-            entry.insert(0, int(first_number / second_number))  # shows the result on screen
+        if first_number.is_integer() and second_number.is_integer() and (first_number / second_number).is_integer():  # Checks if the numbers are integers and if their result is an integer. If so, then it will return an integer
+            entry.insert(0, int(first_number / second_number))  # Shows the result on screen
 
-        elif (first_number / second_number).is_integer():
-            entry.insert(0, int(first_number / second_number))  # shows the result on screen
+        elif (first_number / second_number).is_integer():  # If the result of this 2 numbers is integer then it will return an integer
+            entry.insert(0, int(first_number / second_number))  # Shows the result on screen
 
-        else:
-            entry.insert(0, first_number / second_number)  #shows the result on screen
+        else:  # If it reached here it means
+            entry.insert(0, first_number / second_number)  # Shows the result on screen
 
 
 
@@ -105,9 +113,9 @@ def button_equal():
 
 
 def main():
-    
 
-    # create the buttons
+
+    # Create the buttons
     button0 = tkinter.Button(root, text = "0", padx = 40, pady = 20, command = lambda: button_click(0), bg = "snow")
     button1 = tkinter.Button(root, text = "1", padx = 40, pady = 20, command = lambda: button_click(1), bg = "snow")
     button2 = tkinter.Button(root, text = "2", padx = 40, pady = 20, command = lambda: button_click(2), bg = "snow")
@@ -129,10 +137,10 @@ def main():
     button_clear = tkinter.Button(root, text = "C", padx = 40, pady = 20, command = button_clear_action)
 
     button_decimal_dot = tkinter.Button(root, text = ".", padx = 40, pady = 20, command = button_decimal)
-    # create the buttons
+    # Create the buttons
     # TODO-Add more math actions buttons
 
-    # put the buttons on screen
+    #Puts the buttons on screen
     button7.grid(row = 2, column = 0)
     button8.grid(row = 2, column = 1)
     button9.grid(row = 2, column = 2)
@@ -157,7 +165,7 @@ def main():
     button_clear.grid(row = 5, column = 0)
 
     button_decimal_dot.grid(row = 6, column = 3)
-    # put the buttons on screen
+    # Puts the buttons on screen
 
 
     root.mainloop()
